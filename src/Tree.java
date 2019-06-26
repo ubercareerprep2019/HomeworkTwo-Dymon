@@ -24,7 +24,7 @@ public class Tree {
 	}
 	
 	
-	public static void print(TreeNode root) // takes not argument
+	public static void print(TreeNode root) 
 	{
 		TreeNode rootNode  = root;
 		
