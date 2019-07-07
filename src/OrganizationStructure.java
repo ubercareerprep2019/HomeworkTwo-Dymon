@@ -1,4 +1,5 @@
-import sun.misc.Queue;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class OrganizationStructure {
 
@@ -6,7 +7,7 @@ public class OrganizationStructure {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		
+
 		Employee K = new Employee("K", "Sales Intern");
 		Employee J = new Employee("J", "Sales Representative");
 		J.managesEmployes.add(K);
@@ -36,21 +37,26 @@ public class OrganizationStructure {
 	
 	public static void printLevelByLevel(Employee e)
 	{
-		Employee root = e;
-		System.out.println(root.name);
-		Queue<Employee> corporation= new Queue();
+		Queue<Employee> q = new LinkedList<Employee>();
+		Employee headPosition = e;
+		Employee next = null;
+		Employee save = null;
 		
-		for(int i=0; i <= e.managesEmployes.size()-1; i++)
-		{
-			Employee save = root.managesEmployes.get(i);
-			corporation.enqueue(save);
-			System.out.println(save.name);
-			if(save.managesEmployes.size() > 0)
-			{
-				System.out.println(save.managesEmployes.get(i).name);
-			}
+		
+		
+		q.add(headPosition);
+		
+		System.out.println("The head position is: " + headPosition.name);
+		
+		for(int i = 0; i < headPosition.managesEmployes.size(); i++)
+		{	
+			next = headPosition.managesEmployes.get(i);
+		 	q.add(next);	
+		 	System.out.println("The next position is: " + next.name);
 			
 		}
+
+		
 
 		
 	}
