@@ -39,25 +39,26 @@ public class OrganizationStructure {
 	{
 		Queue<Employee> q = new LinkedList<Employee>();
 		Employee headPosition = e;
-		Employee next = null;
-		Employee save = null;
-		
-		
-		
 		q.add(headPosition);
 		
-		System.out.println("The head position is: " + headPosition.name);
-		
-		for(int i = 0; i < headPosition.managesEmployes.size(); i++)
-		{	
-			next = headPosition.managesEmployes.get(i);
-		 	q.add(next);	
-		 	System.out.println("The next position is: " + next.name);
-			
+		while(!q.isEmpty())
+		{
+			int size = q.size();
+			for(int i = 0; i < size; i++)
+			{
+				Employee save = q.remove();
+				System.out.println("Name: " + save.name + " Title: " + save.title);
+				q.addAll(save.managesEmployes);
+			}
+			System.out.print("\n");
 		}
 
 		
-
+	}
+	
+	
+	public void printNumLevels() {
 		
+	
 	}
 }

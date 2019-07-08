@@ -24,26 +24,39 @@ public class BinarySearchTree {
 	
 	public void insert (int key)
 	{
+		findPosition(root,key);	
+	}
+	
+	
+	public void findPosition(Node root, int key)
+	{
 		if(root == null)
 		{
-			System.out.println("The Root is Null");
-			root = new Node(key);
+		   root = new Node(key);
+		   
+		}
+		
+		if(root.key < key)
+		{
+			if(root.right == null)
+			{
+				root.right = new Node(key);
+			}else {
+				
+				findPosition(root.right, key);
+			}
 			
-		}else {
+		}else if(root.key > key ) {
 			
-			if(root.key > key)
+			if(root.left == null)
 			{
 				root.left = new Node(key);
-				root = root.left;
-				System.out.println("New left node is:" +root.key);
-			}else{
+			}else {
 				
-				
-				root.right = new Node(key);
-				root = root.right;
-				System.out.println("New right node is:" +root.key);
+				findPosition(root.left, key);
 			}
 		}
+		
 	}
 	
 	public static void print(Node root)
