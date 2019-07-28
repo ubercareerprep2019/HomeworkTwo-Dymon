@@ -4,7 +4,7 @@ public class Employee {
 
 	String name;
 	String title;
-	ArrayList<Employee> 	managesEmployes;
+	ArrayList<Employee> managesEmployes;
 	
 	
 	public Employee(String name, String title) {
