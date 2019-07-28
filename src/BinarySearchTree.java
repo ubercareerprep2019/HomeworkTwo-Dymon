@@ -1,5 +1,5 @@
 
-public class BinarySearchTree {
+public class BinarySearchTree <T>{
 	static Node root;
 	
 	public BinarySearchTree(Node root) {
@@ -19,7 +19,9 @@ public class BinarySearchTree {
 		tree.insert(29);
 		tree.insert(99);
 		
-		print(root);
+		//print(root);
+		
+		find(7);
 	}	
 	
 	public void insert (int key)
@@ -57,6 +59,12 @@ public class BinarySearchTree {
 			}
 		}
 		
+	}
+	
+	
+	public static boolean find(int key)
+	{
+	return false;
 	}
 	
 	public static void print(Node root)

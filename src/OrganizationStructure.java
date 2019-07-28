@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class OrganizationStructure {
 
@@ -31,7 +32,7 @@ public class OrganizationStructure {
 		A.managesEmployes.add(C);
 		
 		 printLevelByLevel(A);
-	
+		 printNumLevels(A); 
 
 	}
 	
@@ -57,8 +58,15 @@ public class OrganizationStructure {
 	}
 	
 	
-	public void printNumLevels() {
+	public static void printNumLevels(Employee e) 
+	{
+		Queue<Employee> q = new LinkedList<Employee>();
+		if(e.managesEmployes.size() == 0)
+		{
+			System.out.println("No one reporting to me");
+		}else {
 		
-	
+			
+		}
 	}
 }
