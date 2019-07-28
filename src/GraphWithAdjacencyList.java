@@ -43,8 +43,6 @@ public class GraphWithAdjacencyList {
 		}else {
 			
 			GraphNode nodeOne = adjNode.get(node1);
-			
-			System.out.println(adjNode.get(node1).data);
 			GraphNode nodeTwo = adjNode.get(node2);
 
 			nodeOne.list.add(nodeTwo);
