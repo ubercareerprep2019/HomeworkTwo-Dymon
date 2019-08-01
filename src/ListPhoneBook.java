@@ -1,4 +1,7 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ListPhoneBook {
 	ArrayList phonebook = null;
@@ -8,12 +11,22 @@ public class ListPhoneBook {
 		phonebook = new ArrayList();
 	}
 
-	public static void main(String[] args) {
+	public static void main (String[] args) throws IOException{
 		// TODO Auto-generated method stub
 
 		ListPhoneBook contacts = new ListPhoneBook();
 		contacts.insert("Dymon", 302507156);
 		contacts.insert("Dyn", 302547156);
+		System.out.println(contacts.size());
+		
+		File input = new File("search.txt");
+		Scanner fileReader = new Scanner(input);
+		
+		while(fileReader.hasNextLine())
+		{
+			contacts.insert(fileReader.nextLine(), 0);
+		}
+		
 		System.out.println(contacts.size());
 	}
 	
