@@ -15,7 +15,8 @@ public class GraphWithAdjacencyList {
 		addEdge(1,9);
 		addEdge(1,2);
 		addEdge(1,4);
-		
+		removeNode(9);
+		removeNode(9);
 	}
 
 	
@@ -53,5 +54,22 @@ public class GraphWithAdjacencyList {
 			}
 		}
 		
+	}
+	
+	
+	public static void removeNode(int node)
+	{
+		if(adjNode.isEmpty())
+		{
+			
+		}else {
+			if( adjNode.containsKey(node)) {
+				System.out.println(" found");
+				adjNode.remove(node);
+			}else {
+				System.out.println("Not found");
+			}
+			
+		}
 	}
 }

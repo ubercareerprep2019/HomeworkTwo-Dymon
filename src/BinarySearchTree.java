@@ -21,7 +21,7 @@ public class BinarySearchTree <T>{
 		
 		//print(root);
 		
-		find(7);
+	find(4);
 	}	
 	
 	public void insert (int key)
@@ -62,9 +62,47 @@ public class BinarySearchTree <T>{
 	}
 	
 	
-	public static boolean find(int key)
+	public static void find(int key)
 	{
-	return false;
+		int saveKey = key;
+		
+		if(key == root.key)
+		{
+		
+			System.out.println(" Found");
+			
+			System.out.println("Root is"+root.key);
+			
+		}else {
+			
+			
+			if(key > root.key)
+			{
+				if(root.right == null)
+				{
+					
+				}else {
+					
+					root = root.right;
+					System.out.println("Root is"+root.key);
+					find(saveKey);	
+				}
+			}else {
+				
+				if( root.left == null)
+				{
+					
+					
+				}else {
+				root = root.left;
+				System.out.println("Root is"+root.key);
+				find(saveKey);
+				
+				}
+			}
+		
+		}
+		
 	}
 	
 	public static void print(Node root)
