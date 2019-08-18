@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -5,6 +6,7 @@ import java.util.Stack;
 public class OrganizationStructure {
 
 	static Employee ceo;
+	static int max = 0;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -60,13 +62,33 @@ public class OrganizationStructure {
 	
 	public static void printNumLevels(Employee e) 
 	{
-		Queue<Employee> q = new LinkedList<Employee>();
-		if(e.managesEmployes.size() == 0)
-		{
-			System.out.println("No one reporting to me");
-		}else {
+		Employee head = e;
+		HashSet<String> visited = new HashSet<>();
+		int level = 1;
+
+		DFSHelper(head,visited, level);
 		
+	}
+	
+	public static void DFSHelper(Employee current, HashSet<String> visited, int level)
+	{
+		System.out.println("Level #"+level);
+		visited.add(current.title);
+		level++;
+		//System.out.println(current.name);
+		//System.out.println(current.title);
+	
+		for(int i = 0; i < current.managesEmployes.size(); i++)
+		{
 			
+			System.out.println(current.managesEmployes.get(i).name);
+			System.out.println(current.managesEmployes.get(i).title);
+			
+			if(!visited.contains(current.managesEmployes.get(i).title))
+			{
+				
+				DFSHelper(current.managesEmployes.get(i), visited, level);
+			}
 		}
 	}
 }
