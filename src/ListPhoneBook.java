@@ -4,46 +4,37 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-
+import java.lang.*;
 public class ListPhoneBook {
-	static ArrayList phonebook = null;
-	static HashMap map = new HashMap();
-	public ListPhoneBook()
-	{
-		phonebook = new ArrayList<Contact>();
-	}
+	ArrayList<Contact> phonebook = new ArrayList<>();
+
 
 	public static void main (String[] args) throws IOException{
 		// TODO Auto-generated method stub
 
 		ListPhoneBook contacts = new ListPhoneBook();
+		long startTimeInsert;
+		long endTimeInsert;
+		long totalTimeInsert;
+		long startTimeFind;
+		long endTimeFind;
+		long totalTimeFind;
+		
+		startTimeInsert = System.currentTimeMillis();
+		contacts.readFile();
+		endTimeInsert = System.currentTimeMillis();
+		
+		totalTimeInsert = endTimeInsert - startTimeInsert;
+		System.out.println("Insert took " + totalTimeInsert + "ms.");
+		System.out.println("The size of the PhoneBook is "+contacts.size()+".");
+		
+		startTimeFind = System.currentTimeMillis();
+		System.out.println("Find() was called" + contacts.readSearch() + "times.");
+		endTimeFind = System.currentTimeMillis();
+		
+		totalTimeFind = endTimeFind - startTimeFind;
+		System.out.println("Search took " + totalTimeFind + "ms.");
 	
-		System.out.println(contacts.size());
-		
-		File input = new File("data.csv");
-		File anotherInput = new File("search.txt");
-		
-		Scanner fileReader = new Scanner(input);
-		while(fileReader.hasNextLine())
-		{
-			String nextLine = fileReader.nextLine();
-			String[] split = nextLine.split(",");
-			
-			String name = split[0];
-			Long number = Long.parseLong(split[1]);
-			contacts.insert(name, number);
-			map.put(name, number);
-		}
-		
-		fileReader = new Scanner(anotherInput);
-		while(fileReader.hasNextLine())
-		{
-			System.out.println(find(fileReader.nextLine()));
-		}
-		
-		System.out.println(contacts.size());
-	
-		
 	}
 	
 	public void insert(String name, long number)
@@ -57,19 +48,54 @@ public class ListPhoneBook {
 		return phonebook.size();
 	}
 
-	public static long find(String name) 
+	public long find(String name) 
 	{
-		long entry = 0;
-		
-		if(map.containsKey(name))
-		{	entry = (long) map.get(name);
-			//System.out.println(entry);
-		}else {
-			entry = -1;
+		for(int i = 0; i < phonebook.size(); i++)
+		{
+			Contact entry = phonebook.get(i);
+			if(entry.name.equals(name))
+			{
+				return entry.number;
+			}
 		}
-	
-		return entry;
+		return -1;	
 	}
 	
+	
+	public void readFile() throws FileNotFoundException
+	{
+		File input = new File("data.csv");
+	
+		
+		Scanner fileReader = new Scanner(input);
+		while(fileReader.hasNextLine())
+		{
+			String nextLine = fileReader.nextLine();
+			String[] split = nextLine.split(",");
+			
+			String name = split[0];
+			Long number = Long.parseLong(split[1]);
+			insert(name, number);
+		}
+		
+	}
+	
+	
+	public int readSearch() throws FileNotFoundException
+	{
+		File anotherInput = new File("search.txt");
+		Scanner fileReader = new Scanner(anotherInput);
+	
+		int numFind = 0;
+		while(fileReader.hasNextLine())
+		{
+			String name = fileReader.nextLine();
+			find(name);
+			numFind++;
+		}
+		
+		return numFind;
+	
+	}
 
 }
