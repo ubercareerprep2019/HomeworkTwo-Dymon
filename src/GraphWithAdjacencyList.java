@@ -11,26 +11,29 @@ public class GraphWithAdjacencyList {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		
-		
 		addNode(0);
 		addNode(1);
 		addNode(2);
 		addNode(3);
+		addNode(4);
+		addNode(5);
+		addNode(6);
 		
-		addEdge(0,2);
-		addEdge(2,3);
-		addEdge(2,1);
-		addEdge(2,0);
 		addEdge(0,1);
-		addEdge(3,3);
-		
-		
-	
+		addEdge(0,2);
+		addEdge(2,1);
+		addEdge(0,4);
+		addEdge(4,5);
+		addEdge(3,4);
+		addEdge(4,6);
+		addEdge(4,5);
+		addEdge(2,5);
+		System.out.println("BFS Result:");
 		BFS(2);
+		System.out.println("DFS Result:");
 		DFS(2);
 		
-		//minNumberOfEdges(1,5);
+		getShortestPath(1,5);
 	}
 
 	
@@ -38,16 +41,14 @@ public class GraphWithAdjacencyList {
 	{
 		if(adjNode.containsKey(key))
 		{
-			
+			System.out.println("This key already exist in the graph.");
 		}else {
 		
 		GraphNode newNode = new GraphNode(key);
 		adjNode.put(key, newNode);	
 		}
 		
-		System.out.println(adjNode.entrySet());
-		
-	}
+    }
 	
 	
 	public static void addEdge(int node1, int node2)
@@ -62,10 +63,6 @@ public class GraphWithAdjacencyList {
 
 			nodeOne.list.add(nodeTwo);
 			nodeTwo.list.add(nodeOne);
-			for(int i=0; i<nodeOne.list.size(); i++)
-			{
-				//System.out.println(nodeOne.list.get(i).data);
-			}
 		}
 		
 	}
@@ -75,7 +72,7 @@ public class GraphWithAdjacencyList {
 	{
 		if(adjNode.isEmpty())
 		{
-			
+			System.out.println("The graph is empty.");
 		}else {
 			if( adjNode.containsKey(node)) {
 				System.out.println(" found");
@@ -94,7 +91,7 @@ public class GraphWithAdjacencyList {
 		
 			if(nodeOne.list.contains(nodeTwo) && nodeTwo.list.contains(nodeOne))
 			{
-				System.out.println("removed edge");
+				System.out.println("Removed edge between" + node1 + "and" + node2 + ".");
 				nodeOne.list.remove(nodeTwo);
 				nodeTwo.list.remove(nodeOne);
 			}else {
@@ -106,7 +103,6 @@ public class GraphWithAdjacencyList {
 	
 	public static ArrayList<GraphNode> getAdjNodes(int node)
 	{
-		
 			GraphNode nodeOne = adjNode.get(node);
 			return nodeOne.list;
 	}
@@ -134,8 +130,7 @@ public class GraphWithAdjacencyList {
 				{
 					GraphNode firstNode = q.remove();
 					System.out.println(firstNode.data);
-					
-		
+			
 					for(int j = 0; j < firstNode.list.size(); j++)
 					{
 						
@@ -166,13 +161,45 @@ public class GraphWithAdjacencyList {
 		System.out.println(current.data);
 		for(int i = 0; i < current.list.size(); i++)
 		{
-			
 			if(!visited.contains(current.list.get(i).data))
 			{
 				DFSHelper(current.list.get(i),visited);
 			}
 			
 		}
+	}
+
+	public static int getShortestPath(int node1, int node2)
+	{
+		GraphNode start = adjNode.get(node1);
+		GraphNode end = adjNode.get(node2);
+		
+		System.out.println("Starting at:"+start.data);
+		Queue<GraphNode> path = new LinkedList<GraphNode>();
+		HashSet<GraphNode>visited = new HashSet<>();
+		path.add(start);
+		
+		while(!path.isEmpty())
+		{
+			GraphNode curr = path.remove();
+			visited.add(curr);
+			
+			for(int i = 0; i < curr.list.size(); i++)
+			{
+			   if(!visited.contains(curr.list.get(i)))
+				{
+					visited.add(curr.list.get(i));
+					System.out.println("at:"+curr.list.get(i).data);
+					
+					curr = curr.list.get(i);
+					System.out.println("curr nuw:"+curr.data);
+					
+			    }
+			}
+			
+		}	
+		return -1;
+	
 	}
 
 }

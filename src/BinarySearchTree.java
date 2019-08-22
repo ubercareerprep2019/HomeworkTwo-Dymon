@@ -1,16 +1,12 @@
-
 public class BinarySearchTree <T>{
 	static Node root;
 	
 	public BinarySearchTree(Node root) {
-		// TODO Auto-generated constructor stub
 			this.root = root;
 	}
-
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Node root = new Node(16);
-		BinarySearchTree tree = new BinarySearchTree(root);
+		BinarySearchTree<Node> tree = new BinarySearchTree<>(root);		
 		tree.insert(10);
 		tree.insert(21);
 		tree.insert(7);
@@ -18,10 +14,9 @@ public class BinarySearchTree <T>{
 		tree.insert(18);
 		tree.insert(29);
 		tree.insert(99);
+		print(root);
+		System.out.println(find(99));
 		
-		//print(root);
-		
-	find(4);
 	}	
 	
 	public void insert (int key)
@@ -62,19 +57,16 @@ public class BinarySearchTree <T>{
 	}
 	
 	
-	public static void find(int key)
+	public static boolean find(int key)
 	{
 		int saveKey = key;
 		
 		if(key == root.key)
 		{
-		
 			System.out.println(" Found");
-			
-			System.out.println("Root is"+root.key);
-			
+			System.out.println("here Root is"+root.key);
+			return true;
 		}else {
-			
 			
 			if(key > root.key)
 			{
@@ -99,10 +91,11 @@ public class BinarySearchTree <T>{
 				find(saveKey);
 				
 				}
+			
 			}
-		
+			return false;	
 		}
-		
+	
 	}
 	
 	
