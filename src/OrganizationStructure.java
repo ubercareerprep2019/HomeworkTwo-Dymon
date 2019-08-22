@@ -55,8 +55,6 @@ public class OrganizationStructure {
 			}
 			System.out.print("\n");
 		}
-
-		
 	}
 	
 	
@@ -64,31 +62,28 @@ public class OrganizationStructure {
 	{
 		Employee head = e;
 		HashSet<String> visited = new HashSet<>();
-		int level = 1;
-
-		DFSHelper(head,visited, level);
+		int level = 0;
 		
+		DFSHelper(head,visited, level);
+		System.out.println("Number of Levels:"+max);
 	}
 	
 	public static void DFSHelper(Employee current, HashSet<String> visited, int level)
 	{
-		System.out.println("Level #"+level);
+		
 		visited.add(current.title);
 		level++;
-		//System.out.println(current.name);
-		//System.out.println(current.title);
-	
+		
 		for(int i = 0; i < current.managesEmployes.size(); i++)
 		{
-			
-			System.out.println(current.managesEmployes.get(i).name);
-			System.out.println(current.managesEmployes.get(i).title);
-			
 			if(!visited.contains(current.managesEmployes.get(i).title))
 			{
-				
+			
 				DFSHelper(current.managesEmployes.get(i), visited, level);
 			}
 		}
+		
+		if(max < level) max = level;
+		
 	}
 }
