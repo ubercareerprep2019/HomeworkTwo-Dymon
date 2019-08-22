@@ -17,7 +17,7 @@ public class NumberOfIslands {
 		numberOfIslands(map);
 	}
 	
-	
+	//Incomplete
 	public static int numberOfIslands(boolean [][] isMap)
 	{
 		int[][] visitedMap = new int [isMap.length][isMap.length];
@@ -33,10 +33,10 @@ public class NumberOfIslands {
 					if(isMap[i][j] == true)
 					{
 						num++;
-						System.out.println("here"+ map[i][j]);
+						System.out.println("map[i][j]");
 					}else {
 						
-						System.out.println("here@1"+ map[i][j]);
+						System.out.println(map[i][j]);
 					}
 				}
 			}
